@@ -1725,6 +1725,7 @@ glance:
   clusterLLMInfo: LLM Information
   eventsTable: Full events list
   secretsTable: Full secrets list
+  platform: Platform
 
 clusterBadge:
   addLabel: Add Cluster Badge
@@ -6549,3 +6550,7 @@ gitPicker:
 networkAttachmentDefinition:
   tabs:
     config: Config
+
+llm:
+  chat:
+    notify: LLMs can make mistakes. Check important info

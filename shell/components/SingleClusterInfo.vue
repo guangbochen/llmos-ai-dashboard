@@ -136,39 +136,31 @@ export default {
             resource="namespace"
         />
       </div>
-      <div class="glance-item">
-        <label>{{ t('glance.provider') }}: </label>
-        <span>{{ t(`cluster.provider.${ clusterDetail.status.provider || 'other' }`) }}</span>
-      </div>
-      <div
-        v-if="clusterDetail.kubernetesVersionRaw"
-        class="glance-item"
-      >
-        <label>{{ t('glance.version') }}: </label>
-        <span>{{ clusterDetail.kubernetesVersionBase }}</span>
-        <span
-          v-if="clusterDetail.kubernetesVersionExtension"
-          style="font-size: 0.75em"
-        >{{ clusterDetail.kubernetesVersionExtension }}</span>
-      </div>
-      <div class="glance-item">
-        <label>{{ t('glance.created') }}: </label>
-        <span><LiveDate
-          :value="clusterDetail.metadata.creationTimestamp"
-          :add-suffix="true"
-          :show-tooltip="true"
-        /></span>
-      </div>
-      <div class="section">
-        {{ t('generic.links') }}
-      </div>
-      <div class="glance-item">
-        <nuxt-link
-          :to="exploreLink"
-          class="cluster-link"
+
+      <div class="single-cluster-info">
+        <div class="glance-item">
+          <label>{{ t('glance.platform') }}: </label>
+          <span>{{ clusterDetail.status?.version?.platform || 'other' }}</span>
+        </div>
+        <div
+            v-if="clusterDetail.kubernetesVersionRaw"
+            class="glance-item"
         >
-          {{ t('nav.categories.explore') }}
-        </nuxt-link>
+          <label>{{ t('glance.version') }}: </label>
+          <span>{{ clusterDetail.kubernetesVersionBase }}</span>
+          <span
+              v-if="clusterDetail.kubernetesVersionExtension"
+              style="font-size: 0.85em"
+          >{{ clusterDetail.kubernetesVersionExtension }}</span>
+        </div>
+        <div class="glance-item">
+          <label>{{ t('glance.created') }}: </label>
+          <span><LiveDate
+              :value="clusterDetail.metadata.creationTimestamp"
+              :add-suffix="true"
+              :show-tooltip="true"
+          /></span>
+        </div>
       </div>
     </div>
   </div>
