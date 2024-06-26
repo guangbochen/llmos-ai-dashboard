@@ -161,10 +161,7 @@ export default {
     />
 
     <Banner
-      v-for="(err, i) in fvGetPathErrors(['value'])"
-      :key="i"
-      color="error"
-      :label="err"
+      v-for="(err, i) in fvGetPathErrors(['value'])" :key="i" :label="err"
     />
 
     <div class="mt-20">
@@ -235,7 +232,7 @@ export default {
     }
   }
 
-  ::v-deep .edit-help code {
+  :deep() .edit-help code {
     padding: 1px 5px;
   }
 </style>

@@ -120,11 +120,11 @@ export default {
     project() {
       const limits = this.getDefaultContainerResourceLimits(this.projectName);
 
-      this.$set(this, 'containerResourceLimits', limits);
+      this['containerResourceLimits'] = limits;
     },
 
     projectName(newProjectName) {
-      this.$set(this, 'project', this.projects.find((p) => p.id.includes(newProjectName)));
+      this['project'] = this.projects.find((p => p.id.includes(newProjectName)));
     }
   },
 
@@ -237,7 +237,6 @@ export default {
         :label="t('namespace.containerResourceLimit')"
       >
         <ContainerResourceLimit
-          :key="JSON.stringify(containerResourceLimits)"
           :value="containerResourceLimits"
           :mode="mode"
           :namespace="value"
@@ -250,7 +249,6 @@ export default {
         :weight="-1"
       >
         <Labels
-          :key="rerenderNums"
           default-container-class="labels-and-annotations-container"
           :value="value"
           :mode="mode"

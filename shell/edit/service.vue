@@ -65,10 +65,8 @@ export default {
   data() {
     if (!this?.value?.spec?.type) {
       if (!this.value?.spec) {
-        this.$set(this.value, 'spec', {
-          ports:           [],
-          sessionAffinity: 'None',
-        });
+        this.value['spec'] = {ports:           [],
+          sessionAffinity: 'None',};
       }
     }
 
@@ -136,19 +134,19 @@ export default {
         this.$emit('set-subtype', serviceType);
 
         if (serviceType === HEADLESS) {
-          this.$set(this.value.spec, 'type', CLUSTERIP);
-          this.$set(this.value.spec, 'clusterIP', 'None');
+          this.value.spec['type'] = CLUSTERIP;
+          this.value.spec['clusterIP'] = 'None';
         } else {
           if (
             serviceType !== HEADLESS &&
             this.value?.spec?.clusterIP === 'None'
           ) {
-            this.$set(this.value.spec, 'clusterIP', null);
+            this.value.spec['clusterIP'] = null;
           } else if (serviceType === 'ExternalName') {
-            this.$set(this.value.spec, 'ports', null);
+            this.value.spec['ports'] = null;
           }
 
-          this.$set(this.value.spec, 'type', serviceType);
+          this.value.spec['type'] = serviceType;
         }
       },
     },
@@ -207,7 +205,7 @@ export default {
   mounted() {
     const initialType = this.serviceType;
 
-    this.$set(this, 'serviceType', initialType);
+    this['serviceType'] = initialType;
   },
 
   methods: {
@@ -260,7 +258,7 @@ export default {
     },
 
     updateServicePorts(servicePorts) {
-      this.$set(this.value.spec, 'ports', servicePorts);
+      this.value.spec['ports'] = servicePorts;
     },
 
     targetPortsStrOrInt(targetPorts = []) {
@@ -348,7 +346,7 @@ export default {
           :mode="mode"
           :spec-type="serviceType"
           :rules="fvGetAndReportPathRules('spec.ports')"
-          @input="updateServicePorts"
+          @update:modelValue="updateServicePorts"
         />
       </Tab>
       <Tab
@@ -372,7 +370,7 @@ export default {
               :mode="mode"
               :initial-empty-row="true"
               :protip="false"
-              @input="(e) => $set(value.spec, 'selector', e)"
+              @update:modelValue="(e) => $set(value.spec, 'selector', e)"
             />
           </div>
         </div>
@@ -395,7 +393,7 @@ export default {
               :tooltip-key="
                 hasClusterIp ? 'servicesPage.ips.clusterIpHelpText' : null
               "
-              @input="(e) => $set(value.spec, 'clusterIP', e)"
+              @update:modelValue="(e) => $set(value.spec, 'clusterIP', e)"
             />
           </div>
         </div>
@@ -412,7 +410,7 @@ export default {
               :tooltip-key="
                 hasClusterIp ? 'servicesPage.ips.loadBalancerIp.helpText' : null
               "
-              @input="(e) => $set(value.spec, 'loadBalancerIP', e)"
+              @update:modelValue="(e) => $set(value.spec, 'loadBalancerIP', e)"
             />
           </div>
         </div>
@@ -425,7 +423,7 @@ export default {
               :value-placeholder="t('servicesPage.ips.external.placeholder')"
               :mode="mode"
               :protip="false"
-              @input="(e) => $set(value.spec, 'externalIPs', e)"
+              @update:modelValue="(e) => $set(value.spec, 'externalIPs', e)"
             />
           </div>
         </div>
@@ -461,7 +459,7 @@ export default {
               "
               :label="t('servicesPage.affinity.timeout.label')"
               :placeholder="t('servicesPage.affinity.timeout.placeholder')"
-              @input="
+              @update:modelValue="
                 (e) =>
                   $set(
                     value.spec.sessionAffinityConfig.clientIP,

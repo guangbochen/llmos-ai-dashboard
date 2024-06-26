@@ -368,10 +368,7 @@ export default {
     >
       <div :class="{'col': isCreateEdit, 'span-8': isCreateEdit}">
         <Banner
-          v-for="(err, i) in errorMessages"
-          :key="i"
-          color="error"
-          :label="err"
+          v-for="(err, i) in errorMessages" :key="i" :label="err"
           class="mb-0"
         />
       </div>

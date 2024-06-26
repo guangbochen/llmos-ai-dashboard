@@ -352,10 +352,7 @@ export default {
                 class="clustersPinned"
               >
                 <div
-                  v-for="c in pinFiltered"
-                  :key="c.id"
-                  @click="hide()"
-                >
+                   v-for="(c, i) in pinFiltered" :key="i">
                   <nuxt-link
                     v-if="c.ready"
                     :data-testid="`menu-cluster-${ c.id }`"
@@ -400,10 +397,7 @@ export default {
               <!-- Clusters Search result -->
               <div class="clustersList">
                 <div
-                  v-for="(c, index) in clustersFiltered"
-                  :key="c.id"
-                  :data-testid="`top-level-menu-cluster-${index}`"
-                  @click="hide()"
+                  v-for="(c, index) in clustersFiltered" :key="index"@click="hide()"
                 >
                   <!-- Clusters LLM entry -->
                   <nuxt-link
@@ -490,10 +484,7 @@ export default {
                 </span>
               </div>
               <div
-                v-for="a in configurationApps"
-                :key="a.label"
-                @click="hide()"
-              >
+                 v-for="(a, i) in configurationApps" :key="i">
                 <nuxt-link
                   class="option"
                   :to="a.to"
@@ -1033,15 +1024,15 @@ export default {
   }
 
   .localeSelector {
-    ::v-deep .popover-inner {
+    :deep() .popover-inner {
       padding: 50px 0;
     }
 
-    ::v-deep .popover-arrow {
+    :deep() .popover-arrow {
       display: none;
     }
 
-    ::v-deep .popover:focus {
+    :deep() .popover:focus {
       outline: 0;
     }
 

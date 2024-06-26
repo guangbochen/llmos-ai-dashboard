@@ -1,5 +1,6 @@
 <script lang="ts">
-import Vue from 'vue';
+import { createApp } from 'vue';
+const vueApp = createApp({});
 import { mapGetters } from 'vuex';
 import ResourceTable from '@shell/components/ResourceTable';
 import { SECRET } from '@shell/config/types';

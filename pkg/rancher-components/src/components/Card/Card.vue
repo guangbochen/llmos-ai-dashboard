@@ -1,5 +1,6 @@
 <script lang="ts">
-import Vue from 'vue';
+import { createApp } from 'vue';
+const vueApp = createApp({});
 
 export default Vue.extend({
   name:  'Card',

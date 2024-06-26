@@ -1,5 +1,6 @@
 <script lang="ts">
-import Vue from 'vue';
+import { createApp } from 'vue';
+const vueApp = createApp({});
 import { _VIEW } from '@shell/config/query-params';
 
 export default Vue.extend({
@@ -98,7 +99,7 @@ export default Vue.extend({
     },
 
     hasLabelSlot(): boolean {
-      return !!this.$slots.label || !!this.$scopedSlots.label;
+      return !!this.$slots.label || !!this.$slots.label();
     }
   },
 

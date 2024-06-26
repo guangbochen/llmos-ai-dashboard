@@ -56,7 +56,7 @@ export default {
       this.addIdleListeners();
     }
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.removeEventListener();
     this.clearAllTimeouts();
   },

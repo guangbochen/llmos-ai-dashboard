@@ -336,7 +336,7 @@ export default {
         margin-bottom: 0;
         border-left: 0;
 
-        ::v-deep code {
+        :deep() code {
           font-size: 12px;
           padding: 0;
         }

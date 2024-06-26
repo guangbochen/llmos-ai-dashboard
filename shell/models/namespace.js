@@ -8,7 +8,8 @@ import { set } from '@shell/utils/object';
 import { escapeHtml } from '@shell/utils/string';
 import { insertAt, isArray } from '@shell/utils/array';
 import SteveModel from '@shell/plugins/steve/steve-class';
-import Vue from 'vue';
+import { createApp } from 'vue';
+const vueApp = createApp({});
 import { hasPSALabels, getPSATooltipsDescription, getPSALabels } from '@shell/utils/pod-security-admission';
 import { PSAIconsDisplay, PSALabelsNamespaceVersion } from '@shell/config/pod-security-admission';
 
@@ -164,7 +165,7 @@ export default class Namespace extends SteveModel {
   }
 
   set resourceQuota(value) {
-    Vue.set(this.metadata.annotations, RESOURCE_QUOTA, JSON.stringify(value));
+    this.metadata.annotations[RESOURCE_QUOTA] = JSON.stringify(value);
   }
 
   get detailTopTooltips() {

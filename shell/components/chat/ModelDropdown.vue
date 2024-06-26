@@ -189,7 +189,7 @@ export default {
     :selectable="selectable"
     @search:blur="onBlur"
     @search:focus="onFocus"
-    @input="$emit('click-action', $event)"
+    @update:modelValue="$emit('click-action', $event)"
   >
   </v-select>
 </template>
@@ -197,14 +197,14 @@ export default {
 <style lang='scss' scoped>
 .v-select-model {
   border-width: 0;
-  ::v-deep > .vs__dropdown-toggle {
+  :deep() > .vs__dropdown-toggle {
     width: 100%;
     display: grid;
     grid-template-columns: 75% 25%;
     background: transparent;
   }
 
-  ::v-deep .vs__selected-options {
+  :deep() .vs__selected-options {
     .vs__selected {
       color: #1b1c21;
     }

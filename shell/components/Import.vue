@@ -173,11 +173,7 @@ export default {
         class="yaml-editor"
       />
       <Banner
-        v-for="(err, i) in errors"
-        :key="i"
-        color="error"
-        :label="err"
-      />
+        v-for="(err, i) in errors" :key="i"/>
     </template>
     <template #actions>
       <div
@@ -225,7 +221,7 @@ export default {
     min-height: $min;
     max-height: $max;
 
-    ::v-deep .code-mirror {
+    :deep() .code-mirror {
       .CodeMirror {
         position: initial;
       }

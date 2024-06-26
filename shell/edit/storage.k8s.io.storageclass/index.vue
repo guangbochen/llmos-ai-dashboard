@@ -67,11 +67,11 @@ export default {
       }
     ];
 
-    this.$set(this.value, 'parameters', this.value.parameters || {});
-    this.$set(this.value, 'provisioner', this.value.provisioner || PROVISIONER_OPTIONS[0].value);
-    this.$set(this.value, 'allowVolumeExpansion', this.value.allowVolumeExpansion || allowVolumeExpansionOptions[1].value);
-    this.$set(this.value, 'reclaimPolicy', this.value.reclaimPolicy || reclaimPolicyOptions[0].value);
-    this.$set(this.value, 'volumeBindingMode', this.value.volumeBindingMode || volumeBindingModeOptions[0].value);
+    this.value['parameters'] = this.value.parameters || {};
+    this.value['provisioner'] = this.value.provisioner || PROVISIONER_OPTIONS[0].value;
+    this.value['allowVolumeExpansion'] = this.value.allowVolumeExpansion || allowVolumeExpansionOptions[1].value;
+    this.value['reclaimPolicy'] = this.value.reclaimPolicy || reclaimPolicyOptions[0].value;
+    this.value['volumeBindingMode'] = this.value.volumeBindingMode || volumeBindingModeOptions[0].value;
 
     return {
       reclaimPolicyOptions,
@@ -149,7 +149,7 @@ export default {
 
   watch: {
     provisionerWatch() {
-      this.$set(this.value, 'parameters', {});
+      this.value['parameters'] = {};
     }
   },
 
@@ -168,8 +168,8 @@ export default {
     updateProvisioner(event) {
       const provisioner = event.labelKey ? event.labelKey : event;
 
-      this.$set(this.value, 'provisioner', provisioner);
-      this.$set(this.value, 'allowVolumeExpansion', provisioner === 'driver.longhorn.io');
+      this.value['provisioner'] = provisioner;
+      this.value['allowVolumeExpansion'] = provisioner === 'driver.longhorn.io';
     },
     willSave() {
       Object.keys(this.value.parameters).forEach((key) => {
@@ -223,7 +223,7 @@ export default {
       :searchable="true"
       :taggable="true"
       class="mb-20"
-      @input="updateProvisioner($event)"
+      @update:modelValue="updateProvisioner($event)"
     />
     <Banner
       v-if="provisionerIsDeprecated"

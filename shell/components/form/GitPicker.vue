@@ -1,5 +1,6 @@
 <script lang="ts">
-import Vue from 'vue';
+import { createApp } from 'vue';
+const vueApp = createApp({});
 import SortableTable from '@shell/components/SortableTable/index.vue';
 import RadioButton from '@components/Form/Radio/RadioButton.vue';
 import debounce from 'lodash/debounce';
@@ -378,7 +379,7 @@ export default Vue.extend<Data, any, any, any>({
           :rules="[reposRules]"
           :delay="debounceTime"
           :status="status(hasError.repo)"
-          @input="fetchRepos"
+          @update:modelValue="fetchRepos"
         />
       </div>
 
@@ -398,7 +399,7 @@ export default Vue.extend<Data, any, any, any>({
           :status="status(hasError.repo)"
           :option-label="'name'"
           @search="onSearchRepo"
-          @input="fetchBranches"
+          @update:modelValue="fetchBranches"
         />
       </div>
       <!-- Deals with Branches  -->
@@ -418,7 +419,7 @@ export default Vue.extend<Data, any, any, any>({
           :status="status(hasError.branch)"
           :option-label="'name'"
           @search="onSearchBranch"
-          @input="fetchCommits"
+          @update:modelValue="fetchCommits"
         />
       </div>
       <!-- Deals with Commits, display & allow to pick from it  -->
@@ -443,7 +444,7 @@ export default Vue.extend<Data, any, any, any>({
             <RadioButton
               :value="selectedCommit.commitId"
               :val="row.commitId"
-              @input="final($event)"
+              @update:modelValue="final($event)"
             />
           </template>
 

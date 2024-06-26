@@ -161,8 +161,7 @@ export default {
     >
       <div
         :is="asLink ? 'a' : 'div'"
-        v-for="(slide, i) in sliders"
-        :id="`slide` + i"
+        v-for="(slide, i) in sliders" :key="i" :id="`slide` + i"
         ref="slide"
         :key="get(slide, keyField)"
         class="slide"
@@ -192,10 +191,7 @@ export default {
       :class="{'disable': sliders.length === 1}"
     >
       <div
-        v-for="(slide, i) in slider"
-        :key="i"
-        class="control-item"
-        :class="{'active': activeItemId === i}"
+        v-for="(slide, i) in slider" :key="i" :class="{'active': activeItemId === i}"
         @click="scrollSlide(i, slider.length)"
       />
     </div>

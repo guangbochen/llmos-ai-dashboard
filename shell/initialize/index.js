@@ -1,7 +1,8 @@
 // Taken from @nuxt/vue-app/template/index.js
 // This file was generated during Nuxt migration
 
-import Vue from 'vue';
+import { createApp } from 'vue';
+const vueApp = createApp({});
 import { createRouter } from '../config/router.js';
 import NuxtChild from '../components/nuxt/nuxt-child.js';
 import NuxtError from '../layouts/error.vue';
@@ -40,12 +41,12 @@ import '../plugins/formatters';
 import steveCreateWorker from '../plugins/steve-create-worker';
 
 // Prevent extensions from overriding existing directives
-// Hook into Vue.directive and keep track of the directive names that have been added
+// Hook into vueApp.directive and keep track of the directive names that have been added
 // and prevent an existing directive from being overwritten
 const directiveNames = {};
-const vueDirective = Vue.directive;
+const vueDirective = vueApp.directive;
 
-Vue.directive = function(name) {
+vueApp.directive = function(name) {
   if (directiveNames[name]) {
     console.log(`Can not override directive: ${ name }`); // eslint-disable-line no-console
 
@@ -63,15 +64,15 @@ Vue.directive = function(name) {
 loadDirectives();
 
 // Component: <NuxtChild>
-Vue.component(NuxtChild.name, NuxtChild);
-Vue.component('NChild', NuxtChild);
+vueApp.component(NuxtChild.name, NuxtChild);
+vueApp.component('NChild', NuxtChild);
 
 // Component NuxtLink is imported in server.js or client.js
 
 // Component: <Nuxt>
-Vue.component(Nuxt.name, Nuxt);
+vueApp.component(Nuxt.name, Nuxt);
 
-Object.defineProperty(Vue.prototype, '$nuxt', {
+Object.defineProperty(vueApp.config.globalProperties, '$nuxt', {
   get() {
     const globalNuxt = this.$root.$options.$nuxt;
 
@@ -166,10 +167,10 @@ async function createApp(config = {}) {
       return;
     }
     Vue[installKey] = true;
-    // Call Vue.use() to install the plugin into vm
-    Vue.use(() => {
-      if (!Object.prototype.hasOwnProperty.call(Vue.prototype, key)) {
-        Object.defineProperty(Vue.prototype, key, {
+    // Call vueApp.use() to install the plugin into vm
+    vueApp.use(() => {
+      if (!Object.prototype.hasOwnProperty.call(vueApp.config.globalProperties, key)) {
+        Object.defineProperty(vueApp.config.globalProperties, key, {
           get() {
             return this.$root.$options[key];
           }

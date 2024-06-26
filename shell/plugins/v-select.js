@@ -1,4 +1,5 @@
-import Vue from 'vue';
+import { createApp } from 'vue';
+const vueApp = createApp({});
 import vSelect from 'vue-select';
 
-Vue.component('v-select', vSelect);
+vueApp.component('v-select', vSelect);

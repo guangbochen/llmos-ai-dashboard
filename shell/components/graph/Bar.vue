@@ -48,10 +48,7 @@ export default {
       :style="indicatorStyle"
     />
     <div
-      v-for="(sliceStyle, i) in sliceStyles"
-      :key="i"
-      class="slice"
-      :style="sliceStyle"
+      v-for="(sliceStyle, i) in sliceStyles" :key="i" :style="sliceStyle"
     />
   </div>
 </template>

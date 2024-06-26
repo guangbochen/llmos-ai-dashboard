@@ -1,4 +1,5 @@
-import Vue from 'vue';
+import { createApp } from 'vue';
+const vueApp = createApp({});
 import { VTooltip } from 'v-tooltip';
 import { purifyHTML } from './clean-html';
 
@@ -30,4 +31,4 @@ export const VCleanTooltip = {
   update: bind,
 };
 
-Vue.directive('clean-tooltip', VCleanTooltip);
+vueApp.directive('clean-tooltip', VCleanTooltip);

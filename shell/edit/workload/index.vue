@@ -158,10 +158,7 @@ export default {
         @changed="changed"
       >
         <Tab
-          v-for="(tab, i) in allContainers"
-          :key="tab[idKey]"
-          :label="tab.name"
-          :name="tab[idKey]"
+          v-for="(tab, i) in allContainers" :key="i" :name="tab[idKey]"
           :weight="tab.weight"
           :error="!!tab.error"
         >
@@ -207,7 +204,7 @@ export default {
                       name="initContainer"
                       :options="[true, false]"
                       :labels="[t('workload.container.init'), t('workload.container.standard')]"
-                      @input="updateInitContainer($event, allContainers[i])"
+                      @update:modelValue="updateInitContainer($event, allContainers[i])"
                     />
                   </div>
                 </div>
@@ -288,7 +285,7 @@ export default {
                 :options="namespacedServiceNames"
                 option-label="metadata.name"
                 :loading="isLoadingSecondaryResources"
-                @input="updateServiceAccount"
+                @update:modelValue="updateServiceAccount"
               />
               <div class="spacer" />
               <div>
@@ -321,7 +318,7 @@ export default {
               <HealthCheck
                 :value="allContainers[i]"
                 :mode="mode"
-                @input="Object.assign(allContainers[i], $event)"
+                @update:modelValue="Object.assign(allContainers[i], $event)"
               />
             </Tab>
             <Tab

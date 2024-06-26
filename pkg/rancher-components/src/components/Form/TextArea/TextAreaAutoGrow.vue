@@ -1,5 +1,6 @@
 <script lang="ts">
-import Vue from 'vue';
+import { createApp } from 'vue';
+const vueApp = createApp({});
 import debounce from 'lodash/debounce';
 import { _EDIT, _VIEW } from '@shell/config/query-params';
 
@@ -163,7 +164,7 @@ export default Vue.extend({
     v-bind="$attrs"
     :spellcheck="spellcheck"
     @paste="$emit('paste', $event)"
-    @input="onInput($event.target.value)"
+    @update:modelValue="onInput($event.target.value)"
     @focus="$emit('focus', $event)"
     @blur="$emit('blur', $event)"
   />

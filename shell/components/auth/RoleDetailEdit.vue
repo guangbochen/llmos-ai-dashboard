@@ -115,10 +115,10 @@ export default {
   },
 
   created() {
-    this.$set(this.value, 'rules', this.value.rules || []);
+    this.value['rules'] = this.value.rules || [];
     this.value.rules.forEach((rule) => {
       if (rule.verbs[0] === '*') {
-        this.$set(rule, 'verbs', [...VERBS]);
+        rule['verbs'] = [...VERBS];
       }
     });
 
@@ -135,8 +135,8 @@ export default {
     switch (this.value.subtype) {
     case CLUSTER:
     case NAMESPACE:
-      this.$set(this.value, 'roleTemplateNames', this.value.roleTemplateNames || []);
-      this.$set(this.value, 'locked', !!this.value.locked);
+      this.value['roleTemplateNames'] = this.value.roleTemplateNames || [];
+      this.value['locked'] = !!this.value.locked;
       break;
     }
 
@@ -149,7 +149,7 @@ export default {
     }
 
     if (this.value?.metadata?.name && !this.value.displayName) {
-      this.$set(this.value, 'displayName', this.value.metadata.name);
+      this.value['displayName'] = this.value.metadata.name;
     }
 
     this.$nextTick(() => {
@@ -397,7 +397,7 @@ export default {
       case 'apiGroups':
 
         if (event || (event === '')) {
-          this.$set(rule, 'apiGroups', [event]);
+          rule['apiGroups'] = [event];
         }
 
         break;
@@ -405,9 +405,9 @@ export default {
       case 'verbs':
 
         if (event) {
-          this.$set(rule, 'verbs', [event]);
+          rule['verbs'] = [event];
         } else {
-          this.$set(rule, 'verbs', []);
+          rule['verbs'] = [];
         }
         break;
 
@@ -416,10 +416,10 @@ export default {
           // If we are updating the resources defined in a rule,
           // the event will be an object with the
           // properties apiGroupValue and resourceName.
-          this.$set(rule, 'resources', [event.resourceName]);
+          rule['resources'] = [event.resourceName];
           // Automatically fill in the API group of the
           // selected resource.
-          this.$set(rule, 'apiGroups', [event.apiGroupValue]);
+          rule['apiGroups'] = [event.apiGroupValue];
         } else if (event?.label) {
           // When the user creates a new resource name in the resource
           // field instead of selecting an existing one,
@@ -427,18 +427,18 @@ export default {
           // is shaped like {"label":"something"} instead of
           // the same format as the other options:
           // { resourceName: "something", apiGroupValue: "" }
-          this.$set(rule, 'resources', [event.label]);
+          rule['resources'] = [event.label];
         } else {
-          this.$set(rule, 'resources', []);
-          this.$set(rule, 'apiGroups', []);
+          rule['resources'] = [];
+          rule['apiGroups'] = [];
         }
         break;
 
       case 'nonResourceURLs':
         if (event) {
-          this.$set(rule, 'nonResourceURLs', [event]);
+          rule['nonResourceURLs'] = [event];
         } else {
-          this.$set(rule, 'nonResourceURLs', []);
+          rule['nonResourceURLs'] = [];
         }
         break;
 
@@ -452,7 +452,7 @@ export default {
     updateSelectValue(row, key, event) {
       const value = event.label ? event.value : event;
 
-      this.$set(row, key, value);
+      row[key] = value;
     },
     cancel() {
       this.done();
@@ -560,9 +560,7 @@ export default {
         :search="false"
       />
       <div
-        v-for="(inherited, index) of inheritedRules"
-        :key="index"
-      >
+        v-for="(inherited, index) of inheritedRules" :key="index">
         <div class="spacer" />
         <h3>
           Inherited from {{ inherited.template.nameDisplay }}
@@ -688,7 +686,7 @@ export default {
                     :multiple="true"
                     :mode="mode"
                     :data-testid="`grant-resources-verbs${props.i}`"
-                    @input="updateSelectValue(props.row.value, 'verbs', $event)"
+                    @update:modelValue="updateSelectValue(props.row.value, 'verbs', $event)"
                   />
                 </div>
                 <div :class="ruleClass">
@@ -701,7 +699,7 @@ export default {
                     :taggable="true"
                     :mode="mode"
                     :data-testid="`grant-resources-resources${props.i}`"
-                    @input="setRule('resources', props.row.value, $event)"
+                    @update:modelValue="setRule('resources', props.row.value, $event)"
                     @createdListItem="setRule('resources', props.row.value, $event)"
                   />
                 </div>
@@ -711,7 +709,7 @@ export default {
                     :disabled="isBuiltin"
                     :mode="mode"
                     :data-testid="`grant-resources-api-groups${props.i}`"
-                    @input="setRule('apiGroups', props.row.value, $event.target.value)"
+                    @update:modelValue="setRule('apiGroups', props.row.value, $event.target.value)"
                   >
                 </div>
                 <div
@@ -723,7 +721,7 @@ export default {
                     :disabled="isBuiltin"
                     :mode="mode"
                     :data-testid="`grant-resources-non-resource-urls${props.i}`"
-                    @input="setRule('nonResourceURLs', props.row.value, $event.target.value)"
+                    @update:modelValue="setRule('nonResourceURLs', props.row.value, $event.target.value)"
                   >
                 </div>
               </div>
@@ -776,7 +774,7 @@ export default {
     color: var(--error);
   }
 
-  ::v-deep {
+  :deep() {
     .column-headers {
       margin-right: 75px;
       margin-bottom: 5px;

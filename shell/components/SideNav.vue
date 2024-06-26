@@ -409,10 +409,9 @@ export default {
   <nav class="side-nav">
     <!-- Actual nav -->
     <div class="nav">
-      <template v-for="(g) in groups">
+      <template  v-for="((g), i) in groups" :key="i">
         <Group
           ref="groups"
-          :key="g.name"
           id-prefix=""
           class="package"
           :group="g"
@@ -470,7 +469,7 @@ export default {
     overflow-y: auto;
 
     // h6 is used in Group element
-    ::v-deep h6 {
+    :deep() h6 {
       margin: 0;
       letter-spacing: normal;
       line-height: 15px;

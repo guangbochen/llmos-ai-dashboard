@@ -286,7 +286,7 @@ export default (
         :placeholder="_placeholder"
         autocapitalize="off"
         :class="{ conceal: type === 'multiline-password' }"
-        @input="onInput($event)"
+        @update:modelValue="onInput($event)"
         @focus="onFocus"
         @blur="onBlur"
       />
@@ -303,7 +303,7 @@ export default (
         autocomplete="off"
         autocapitalize="off"
         :data-lpignore="ignorePasswordManagers"
-        @input="onInput($event.target.value)"
+        @update:modelValue="onInput($event.target.value)"
         @focus="onFocus"
         @blur="onBlur"
         @change="onChange"

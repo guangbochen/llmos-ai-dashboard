@@ -75,10 +75,7 @@ export default {
                 @click="switchLocale('none')"
               />
               <li
-                v-for="(label, name) in availableLocales"
-                :key="name"
-                class="hand"
-                @click="switchLocale(name)"
+                v-for="(label, name) in availableLocales" :key="name"@click="switchLocale(name)"
               >
                 {{ label }}
               </li>
@@ -91,7 +88,7 @@ export default {
       <Select
         :value="selectedOption"
         :options="localesOptions"
-        @input="switchLocale($event)"
+        @update:modelValue="switchLocale($event)"
       />
     </div>
   </div>

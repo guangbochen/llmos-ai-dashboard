@@ -164,12 +164,12 @@ export default {
     },
 
     selectType(type) {
-      this.$set(this.value, '_type', type);
+      this.value['_type'] = type;
 
       this.secretType = type;
 
       if (this.mode === _CREATE && type === 'custom') {
-        this.$set(this.value, '_type', '');
+        this.value['_type'] = '';
       }
     },
 
@@ -186,7 +186,7 @@ export default {
 
     selectCustomType(type) {
       if (type !== 'custom') {
-        this.$set(this.value, '_type', type);
+        this.value['_type'] = type;
       }
     }
   },
@@ -228,7 +228,7 @@ export default {
             :reduce="(e) => e.value"
             label-key="secret.type"
             required
-            @input="selectCustomType"
+            @update:modelValue="selectCustomType"
           />
         </div>
 

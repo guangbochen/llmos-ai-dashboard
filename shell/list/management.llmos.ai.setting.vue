@@ -89,10 +89,7 @@ export default {
       </div>
     </Banner>
     <div
-      v-for="setting in settings"
-      :key="setting.id"
-      class="advanced-setting mb-20"
-    >
+       v-for="(setting, i) in settings" :key="i">
       <div class="header">
         <div class="title">
           <h1>

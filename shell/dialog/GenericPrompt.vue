@@ -93,10 +93,7 @@ export default {
       class="bottom"
     >
       <Banner
-        v-for="(err, i) in errors"
-        :key="i"
-        color="error"
-        :label="err"
+        v-for="(err, i) in errors" :key="i" :label="err"
       />
       <div class="buttons">
         <button

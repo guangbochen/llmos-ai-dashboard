@@ -1,7 +1,8 @@
-import Vue from 'vue';
+import { createApp } from 'vue';
+const vueApp = createApp({});
 
-Vue.directive('focus', {
-  inserted(_el, _binding, vnode) {
+vueApp.directive('focus', {
+  mounted(_el, _binding, vnode) {
     const element = getElement(vnode);
 
     if (element) {

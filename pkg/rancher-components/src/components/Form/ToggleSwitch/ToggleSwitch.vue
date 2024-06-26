@@ -1,5 +1,6 @@
 <script lang="ts">
-import Vue from 'vue';
+import { createApp } from 'vue';
+const vueApp = createApp({});
 export default Vue.extend({
   props: {
     value: {
@@ -60,7 +61,7 @@ export default Vue.extend({
       <input
         type="checkbox"
         :checked="state"
-        @input="toggle(null)"
+        @update:modelValue="toggle(null)"
       >
       <span class="slider round" />
     </label>

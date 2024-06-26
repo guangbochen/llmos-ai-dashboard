@@ -1,16 +1,17 @@
-import Vue from 'vue';
+import { createApp } from 'vue';
+const vueApp = createApp({});
 import { purifyHTML } from './clean-html';
 
 export const cleanHtmlDirective = {
-  inserted(el, binding) {
+  mounted(el, binding) {
     el.innerHTML = purifyHTML(binding.value);
   },
-  componentUpdated(el, binding) {
+  updated(el, binding) {
     el.innerHTML = purifyHTML(binding.value);
   },
-  unbind(el) {
+  unmounted(el) {
     el.innerHTML = '';
   }
 };
 
-Vue.directive('clean-html', cleanHtmlDirective);
+vueApp.directive('clean-html', cleanHtmlDirective);

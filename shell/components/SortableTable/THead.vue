@@ -225,9 +225,7 @@ export default {
         :width="expandWidth"
       />
       <th
-        v-for="col in columns"
-        v-show="!hasAdvancedFiltering || (hasAdvancedFiltering && col.isColVisible)"
-        :key="col.name"
+         v-for="(col, i) in columns" :key="i" v-show="!hasAdvancedFiltering || (hasAdvancedFiltering && col.isColVisible)"
         :align="col.align || 'left'"
         :width="col.width"
         :class="{ sortable: col.sort, [col.breakpoint]: !!col.breakpoint}"
@@ -309,9 +307,7 @@ export default {
             </p>
             <ul>
               <li
-                v-for="(col, index) in tableColsOptions"
-                v-show="col.isTableOption"
-                :key="index"
+                v-for="(col, index) in tableColsOptions" :key="index" v-show="col.isTableOption"
                 :class="{ 'visible': !col.preventColToggle }"
               >
                 <Checkbox
@@ -319,7 +315,7 @@ export default {
                   v-model="col.isColVisible"
                   class="table-options-checkbox"
                   :label="col.label"
-                  @input="tableOptionsCheckbox($event, col.label)"
+                  @update:modelValue="tableOptionsCheckbox($event, col.label)"
                 />
               </li>
             </ul>

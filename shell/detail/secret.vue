@@ -87,7 +87,7 @@ export default {
     }
 
     if (!this.value._type) {
-      this.$set(this.value, '_type', TYPES.OPAQUE);
+      this.value['_type'] = TYPES.OPAQUE;
     }
 
     return {
@@ -253,10 +253,7 @@ export default {
 
       <div v-else>
         <div
-          v-for="(row,idx) in parsedRows"
-          :key="idx"
-          class="entry"
-        >
+          v-for="(row,idx) in parsedRows" :key="idx">
           <DetailText
             :value="row.value"
             :label="row.key"

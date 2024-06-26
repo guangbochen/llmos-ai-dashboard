@@ -42,10 +42,7 @@ export default {
     :reactivity="workloads.length"
   >
     <div
-      v-for="(path, i) in paths"
-      :key="i"
-      class="target"
-    >
+      v-for="(path, i) in paths" :key="i">
       <IngressFullPath :row="path" />
       <i class="icon icon-chevron-right" />
       <nuxt-link

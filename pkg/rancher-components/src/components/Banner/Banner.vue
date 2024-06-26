@@ -1,5 +1,6 @@
 <script lang="ts">
-import Vue from 'vue';
+import { createApp } from 'vue';
+const vueApp = createApp({});
 import { nlToBr } from '@shell/utils/string';
 import { stringify } from '@shell/utils/error';
 

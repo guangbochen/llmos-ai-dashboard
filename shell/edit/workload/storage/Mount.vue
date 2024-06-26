@@ -86,10 +86,7 @@ export default {
       <span />
     </div>
     <div
-      v-for="(volumeMount, i) in volumeMounts"
-      :key="i"
-      class="mount-rows"
-    >
+      v-for="(volumeMount, i) in volumeMounts" :key="i">
       <div>
         <LabeledInput
           :id="`mount-path-${i}`"

@@ -55,10 +55,10 @@ export default {
     }
 
     if (!nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution) {
-      this.$set(nodeAffinity, 'requiredDuringSchedulingIgnoredDuringExecution', { nodeSelectorTerms: [] } );
+      nodeAffinity['requiredDuringSchedulingIgnoredDuringExecution'] = { nodeSelectorTerms: [] };
     }
     if (!nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution) {
-      this.$set(nodeAffinity, 'preferredDuringSchedulingIgnoredDuringExecution', []);
+      nodeAffinity['preferredDuringSchedulingIgnoredDuringExecution'] = [];
     }
 
     return {
@@ -140,8 +140,8 @@ export default {
             }, { root: true });
 
             delete this.value.nodeSelector;
-            this.$set(this, 'nodeName', '');
-            this.$set(this, 'selectNode', null);
+            this['nodeName'] = '';
+            this['selectNode'] = null;
           }
         }
       },
@@ -158,7 +158,7 @@ export default {
         name="selectNode"
         :options="selectNodeOptions"
         :mode="mode"
-        @input="update"
+        @update:modelValue="update"
       />
     </div>
     <template v-if="selectNode === 'nodeSelector'">
@@ -171,7 +171,7 @@ export default {
             :mode="mode"
             :multiple="false"
             :loading="loading"
-            @input="update"
+            @update:modelValue="update"
           />
         </div>
       </div>
@@ -180,7 +180,7 @@ export default {
       <NodeAffinity
         v-model="nodeAffinity"
         :mode="mode"
-        @input="update"
+        @update:modelValue="update"
       />
     </template>
   </div>

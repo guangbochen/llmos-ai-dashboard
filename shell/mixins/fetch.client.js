@@ -1,4 +1,5 @@
-import Vue from 'vue';
+import { createApp } from 'vue';
+const vueApp = createApp({});
 import { hasFetch, normalizeError, addLifecycleHook } from '../utils/nuxt';
 
 const isSsrHydration = (vm) => vm.$vnode && vm.$vnode.elm && vm.$vnode.elm.dataset && vm.$vnode.elm.dataset.fetchKey;
@@ -49,7 +50,7 @@ function created() {
 
   // Merge data
   for (const key in data) {
-    Vue.set(this.$data, key, data[key]);
+    this.$data[key] = data[key];
   }
 }
 
