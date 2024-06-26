@@ -54,4 +54,6 @@ export function init(store) {
     MANAGEMENT.MODELFILE,
     MANAGEMENT.CHAT
   ]);
+
+  configureType(MANAGEMENT.CHAT, { showListMasthead: false });
 }

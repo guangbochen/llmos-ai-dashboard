@@ -41,7 +41,6 @@ export default {
   computed: {
     ...mapGetters(['clusterId']),
     ...mapGetters(['clusterReady', 'isMgmt', 'currentCluster', 'currentProduct']),
-    ...mapGetters({ features: 'features/get' }),
 
     value: {
       get() {
@@ -422,10 +421,6 @@ export default {
                     <div class="cluster-name">
                       {{ t('product.llm') }}
                     </div>
-                    <Pinned
-                        :class="{'showPin': c.pinned}"
-                        :cluster="c"
-                    />
                   </nuxt-link>
 
                   <!-- Clusters k8s entry -->
@@ -443,10 +438,6 @@ export default {
                     <div class="cluster-name">
                       {{ t('product.clusterManagement') }}
                     </div>
-                    <Pinned
-                      :class="{'showPin': c.pinned}"
-                      :cluster="c"
-                    />
                   </nuxt-link>
                   <span
                     v-else
@@ -458,10 +449,6 @@ export default {
                       class="rancher-provider-icon"
                     />
                     <div class="cluster-name">{{ c.label }}</div>
-                    <Pinned
-                      :class="{'showPin': c.pinned}"
-                      :cluster="c"
-                    />
                   </span>
                 </div>
               </div>

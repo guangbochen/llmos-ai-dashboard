@@ -1541,6 +1541,7 @@ glance:
   clusterInfo: 集群信息
   clusterLLMInfo: LLM 信息
   eventsTable: 完整事件列表
+  platform: 平台架构
 
 clusterBadge:
   addLabel: 添加集群徽章
@@ -6348,3 +6349,7 @@ gitPicker:
 networkAttachmentDefinition:
   tabs:
     config: 配置
+
+llm:
+  chat:
+    notify: LLMs can make mistakes. Check important info

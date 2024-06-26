@@ -290,7 +290,6 @@ export const getters = {
       out = active[0];
     }
 
-    console.log('currentProduct', out);
     return out;
   },
 

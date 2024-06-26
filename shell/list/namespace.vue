@@ -37,7 +37,7 @@ export default {
     filterRow() {
       if (this.currentProduct.hideSystemResources) {
         return this.rows.filter( (N) => {
-          return !N.isSystem && !N.isFleetManaged;
+          return !N.isSystem;
         });
       } else {
         return this.rows;

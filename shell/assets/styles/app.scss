@@ -34,3 +34,8 @@
 @import "./vendor/vue-js-modal";
 @import "./vendor/code-mirror";
 @import 'node_modules/xterm/css/xterm.css';
+@import '@shell/components/SvgIcon/SvgIcon';
+@import "./chat/animation";
+@import "./chat/helper";
+@import "./chat/markdown";
+@import "./chat/menu";
