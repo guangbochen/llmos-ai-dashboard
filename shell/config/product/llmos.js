@@ -9,7 +9,8 @@ import {
   SECRET,
   CONFIG_MAP,
   MANAGEMENT,
-  ML_WORKLOAD_TYPES, CEPH, NVIDIA
+  ML_WORKLOAD_TYPES, CEPH, NVIDIA,
+  WORKLOAD_TYPES,
 } from '@shell/config/types';
 
 import {
@@ -127,6 +128,7 @@ export function init(store) {
     ML_WORKLOAD_TYPES.MODEL_SERVICE,
   ]);
 
+
   virtualType({
     ifHaveType: NVIDIA.CLUSTER_POLICY,
     labelKey:   'typeLabel."nvidia.com.clusterpolicy"',
@@ -140,6 +142,29 @@ export function init(store) {
     exact:  false,
     weight: 200,
   });
+
+  virtualType({
+    ifHaveType: WORKLOAD_TYPES.JOB,
+    labelKey:   'typeLabel."batch.job"',
+    group:      'workload',
+    name:       WORKLOAD_TYPES.JOB,
+    namespaced: true,
+    route:      {
+      name:   `c-cluster-product-resource`,
+      params: {
+        resource: WORKLOAD_TYPES.JOB,
+        product:  NAME
+      }
+    },
+    exact:  false,
+    weight: 221,
+  });
+  basicType(
+    [
+      WORKLOAD_TYPES.JOB,
+    ],
+    'workload'
+  );
 
   configureType(LLMOS.GPUDEVICE, { isCreatable: false, isEditable: true });
   virtualType({
@@ -297,6 +322,7 @@ export function init(store) {
   });
 
   virtualType({
+    ifHaveType: NODE,
     labelKey:   `typeLabel."${ LLMOS.TOOL }"`,
     group:      'advanced',
     name:       LLMOS.TOOL,
@@ -322,6 +348,7 @@ export function init(store) {
 
   mapType(LLMOS.TOOL, store.getters['i18n/t'](`typeLabel.${ LLMOS.TOOL }`, { count: 2 }));
 
+  weightGroup('workload', 101, true);
   weightGroup('gpuManagement', 100, true);
   weightGroup('llmosStorage', 99, true);
   weightGroup('monitoring', 98, true);
